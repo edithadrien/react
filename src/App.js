@@ -9,23 +9,25 @@ function App() {
   const [employees, setEmployees] = useState(
     [
       {
+        id: 1,
         name: "Suzy", 
         role: "Developer", 
         img: "https://images.pexels.com/photos/3201694/pexels-photo-3201694.jpeg",
       },
         {
-        
+        id: 2,
         name: "Caleb", 
         role: "Developer", 
         img: "https://images.pexels.com/photos/1181695/pexels-photo-1181695.jpeg",
       },
       {
-        
+        id: 3,
         name: "Matthew", 
         role: "Developer", 
         img: "https://images.pexels.com/photos/2182974/pexels-photo-2182974.jpeg",
       },
       {
+        id: 4,
         name: "Gina", 
         role: "Developer", 
         img: "https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg",
@@ -38,6 +40,16 @@ function App() {
       }
     ]
   );
+
+  function updateEmployee(id, newName, newRole){
+    const updatedEmployees = employees.map((employee) => {
+      if (id == employee.id){
+        return {...employee, name: newName, role: newRole};
+      }
+      return employee;
+    });
+    setEmployees(updatedEmployees);
+  }
 
   const showEmployees = true;
   return (
@@ -55,10 +67,12 @@ function App() {
               {employees.map((employee) => {
                 
                 return (<Employee 
-                key={uuidv4()}
+                key={employee.id}
+                id={employee.id}
                 name={employee.name}
                 role={employee.role} 
                 img={employee.img}
+                updateEmployee={updateEmployee}
                 />
               )})}
               
