@@ -67,7 +67,7 @@ function Employees() {
 
   const showEmployees = true;
   return (
-    <div className="App bg-gray-300 min-h-screen">
+    <div className="">
       {showEmployees ? (
         <>
           
