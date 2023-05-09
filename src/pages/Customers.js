@@ -5,6 +5,12 @@ import AddCustomer from "../components/AddCustomer";
 
 export default function Customers(){
     const [customers, setCostumers] = useState();
+    const [show, setShow] = useState(false);
+
+    function toggleShow(){
+        setShow(!show);
+    }
+    
     useEffect(() => {
         const url = baseUrl + 'api/customers/';
         fetch(url)
@@ -29,6 +35,8 @@ export default function Customers(){
             }
             return response.json();
         }).then((data) =>{
+            toggleShow();
+            setCostumers([...customers, data.customer]);
             //assume the add was successful
             //hide the modeal
             //make sure the list is updated appropriately
@@ -51,7 +59,7 @@ export default function Customers(){
                         
             }) : null}
             </ul>
-            <AddCustomer newCustomer={newCustomer}/>
+            <AddCustomer newCustomer={newCustomer} show={show} toggleShow={toggleShow}/>
         </>
     )
 }
